@@ -1,0 +1,18 @@
+{% extends 'base.html.j2' %}
+
+{% block title %}
+    Poke Farm
+{% endblock %}
+
+{% block content %}
+
+<h1>Poke Farm</h1>
+<form action="/poke_farm" method="POST">
+  <div class="mb-3">
+    <label for="name" class="form-label">Pokemon Name</label>
+    <input type="text" name = "name" class="form-control" id="name">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+{% endblock %}
