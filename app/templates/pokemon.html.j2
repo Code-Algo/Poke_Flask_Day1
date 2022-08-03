@@ -1,0 +1,21 @@
+{% extends 'base.html.j2' %}
+{% block css %}
+     <link rel="stylesheet" href="{{url_for('static', filename='css/pokemon.css')}}">
+{% endblock %}
+
+{% block title %}
+Pokemon
+{% endblock %}
+
+{% block content %}
+
+    <h1><strong>Pokemon</strong></h1>
+    <ul>
+    {% for poke in pokemon %}
+        <li>{{poke}}</li>
+    {% endfor %}
+    </ul>
+
+</body>
+</html>
+{% endblock %}
