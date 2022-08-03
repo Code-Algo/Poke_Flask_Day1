@@ -21,17 +21,21 @@ def poke_farm():
     if request.method == 'POST':
         name = request.form.get('name')
         print(name)
-    url = f"https://pokeapi.co/api/v2/pokemon/{name}"
-    response = requests.get(url)
-    if not response.ok:
-        error_string = "We had an unexpected error. soz."
-        return render_template('poke_farm.html.j2', error=error_string)
-    data = []
-    new_data = []
-    for pokemon in data:
-        pokemon_dict={
-            "Name":pokemon['name'],
-            "Ability":pokemon['ability'][1],
-            
+        url = f"https://pokeapi.co/api/v2/pokemon/{name.lower()}"
+        response = requests.get(url)
+        print(response)
+        data = response.json()
+        new_data = {
+        'name':data['name'],
+        'ability': data['abilities'][1]['ability']['name'],
+        'defence':data['stats'][2]['base_stat'],
+        'attack':data['stats'][1]['base_stat'],
+        'HP':data['stats'][0]['base_stat'],
+        'sprite':data['sprites']['other']['home']['front_default']
         }
+        return render_template('poke_farm.html.j2', poke_data=new_data)
     return render_template('poke_farm.html.j2')
+
+    
+
+
