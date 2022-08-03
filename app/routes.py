@@ -20,7 +20,7 @@ def pokemon():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    form = RegisterForm
+    form = RegisterForm()
     return render_template('register.html.j2', form=form)
 
 
