@@ -3,6 +3,8 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
 from app import app
+from .models import User
+import random
 
 # Forms
 class LoginForm(FlaskForm):
@@ -18,7 +20,19 @@ class RegisterForm(FlaskForm):
     confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password', message = 'Passwords Must Match')])
     submit = SubmitField('Register')
 
+
+    r1=random.randint(1,1000)
+    r2=random.randint(1001,2000)
+    r3=random.randint(2001,3000)
+    r4=random.randint(3001,4000)
+    #https://avatars.dicebear.com/api/adventurer-neutral/12.svg
+
+    r1_img = f'<img src="https://avatars.dicebear.com/api/adventurer-neutral/{r1}.svg" height="75px>'
+
+
+
     def validate_email(form, field):
-        if field.data.lower() in app.config.get('REGISTERED_USERS'):
+        same_email_user = User.query.filter_by(email = field.data).first()
+        if same_email_user:
             return ValidationError('Email is Already in Use')
 
