@@ -7,27 +7,50 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{{url_for('index')}}">Hearthome</a>
+          <a class="nav-link active" aria-current="page" href="{{url_for('main.index')}}">Hearthome</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{url_for('poke_farm')}}">Poke Farm</a>
+          <a class="nav-link" href="{{url_for('main.poke_farm')}}">Poke Farm</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{url_for('pokemon')}}">Pokemon</a>
+          <a class="nav-link" href="{{url_for('main.pokemon')}}">Pokemon</a>
         </li>
-        {% if current_user.is_authenticated %}
+        {% if current_user.is_anonymous %}
         <li class="nav-item">
-          <a class="nav-link"  href="{{url_for('logout')}}">Logout</a>
-        </li>
-        {% else %}
-        <li class="nav-item">
-          <a class="nav-link"  href="{{url_for('login')}}">Login</a>
+          <a class="nav-link"  href="{{url_for('auth.login')}}">Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"  href="{{url_for('register')}}">Register</a>
+          <a class="nav-link"  href="{{url_for('auth.register')}}">Register</a>
         </li>
         </ul>
         {% endif %}
     </div>
+    {% if current_user.is_authenticated %}
+    <ul class="navbar-nav ms-auto align-items-center">
+      <a href='#'>
+          <img src="{{current_user.get_icon_url()}}" style="height:50px;">
+      </a>
+      <li class="nav-item">
+        <div class="row">
+          <div class="col-12">
+            <a href ="{{url_for('auth.edit_profile')}}">
+              <i class="bi bi-gear"></i></div>
+            </a>
+          </div>
+          <div class="col-12">
+            <a href ="{{url_for('auth.logout')}}">
+              <i class="bi bi-arrow-right-square"></i>
+            </a> 
+          </div>
+        </div>
+      </li>
+    </ul>
+    {% endif %}
+    
+    
+    
+    
+    </div>
   </div>
 </nav>
+       
