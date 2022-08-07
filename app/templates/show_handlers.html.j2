@@ -1,0 +1,18 @@
+{% extends 'base.html,j2' %}
+{% block title %}
+Other Poke Handlers
+{% endblock %}
+
+<h1> Opponents </h1>
+<hr>
+
+{% for user in users %}
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="{{user.get_icon_url}}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{user.first_name}}{{user.last_name}}</h5>
+    <p class="card-text">{{user.pokemon}}</p>
+    <a href ="" class = "btn btn-danger">Battle</a>
+  </div>
+</div>
+{% endfor %}
