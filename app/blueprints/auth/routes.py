@@ -57,7 +57,7 @@ def edit_profile():
         except:
             flash("Error updating profile", 'danger')
             return redirect(url_for('auth.edit_profile'))
-        return redirect(url_for('main.index'))
+        return redirect(url_for('poke.index'))
     return render_template('register.html.j2', form=form)
 
 
@@ -75,7 +75,7 @@ def login():
             # Flash User
             flash("Login Successful", "success")
             login_user(u)
-            return redirect(url_for('main.index'))
+            return redirect(url_for('poke.index'))
         #flash this
         flash("Incorrect Email/Password Combo", "warning")
         return render_template('login.html.j2', form=form)
@@ -88,4 +88,4 @@ def logout():
     logout_user()
     # flash user say goodbye
     flash("Logout Successful", "primary")
-    return redirect(url_for('main.index'))
+    return redirect(url_for('poke.index'))

@@ -37,6 +37,9 @@ def create_app(config_class=Config):
     from .blueprints.main import bp as main_bp
     app.register_blueprint(main_bp)
 
+    from .blueprints.poke import bp as poke_bp
+    app.register_blueprint(poke_bp)
+
     return app
 
 from app import models

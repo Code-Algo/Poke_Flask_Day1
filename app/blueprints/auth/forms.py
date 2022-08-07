@@ -59,3 +59,5 @@ class RegisterForm(FlaskForm):
     icon = RadioField('Avatar', validators=[DataRequired()], choices=[(9000,"Don't Change"),(r1, r1_img), (r2, r2_img), (r3, r3_img), (r4, r4_img)])
 
 
+
+

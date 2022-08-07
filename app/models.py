@@ -54,6 +54,25 @@ class User(UserMixin, db.Model):
     def get_icon_url(self):
         return f"https://avatars.dicebear.com/api/adventurer-neutral/{self.icon}.svg"
 
+    # Check to see if pokemon is already on poke team
+    def is_captured(self, pokemon_to_check):
+        return pokemon_to_check in self.pokemon
+
+    def capture_pokemon(self, pokemon_to_capture):
+        if not self.is_pokemon(pokemon_to_capture):
+            self.pokemon.append(pokemon_to_capture)
+            db.session.commit()
+
+    def release_pokemon(self, pokemon_to_release):
+        if self.is_pokemon(pokemon_to_release):
+           self.pokemon.remove(pokemon_to_release)
+           db.session.commit()
+
+    def captured_pokemon(self):
+        # get my own poke
+        return self.pokemon.all()
+
+
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
@@ -68,6 +87,7 @@ class Pokemon(db.Model):
     attack = db.Column(db.String)
     defence = db.Column(db.String)
     hp = db.Column(db.String)
+    url = db.Column(db.String)
 
     def __repr__(self):
         return f'<Pokemon: {self.id} | {self.body}'

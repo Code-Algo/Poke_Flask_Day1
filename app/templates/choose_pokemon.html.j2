@@ -1,21 +1,30 @@
 {% extends 'base.html.j2' %}
-{% block css %}
-     <link rel="stylesheet" href="{{url_for('static', filename='css/pokemon.css')}}">
-{% endblock %}
 
 {% block title %}
-Pokemon
+Choose Your Pokemon
 {% endblock %}
 
 {% block content %}
 
-    <h1><strong>Pokemon</strong></h1>
-    <ul>
-    {% for poke in pokemon %}
-        <li>{{poke}}</li>
-    {% endfor %}
-    </ul>
+<h1></h1>
+<form action="/choose_pokemon" method="POST">
+  <div class="mb-3">
+    <label for="name" class="form-label">Enter Pokemon Name</label>
+    <input type="text" name = "name" class="form-control" id="name">
+  </div>
+  <button type="submit" class="btn btn-secondary">Submit</button>
+  <small style="color:red">{{error}}</small>
+</form>
 
-</body>
-</html>
+{% if poke_data %}
+
+<img src = {{poke_data.sprite}}>
+<h1>{{poke_data.name.title()}}</h1>
+<p>Ability: {{poke_data.ability}}</p>
+<p>Defence: {{poke_data.defence}}</p>
+<p>Attack: {{poke_data.attack}}</p>
+<p>HP: {{poke_data.HP}}</p>
+
+{% endif %}
+
 {% endblock %}

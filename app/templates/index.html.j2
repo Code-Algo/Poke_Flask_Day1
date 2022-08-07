@@ -5,5 +5,10 @@ Hearthome
 {% endblock %}
 
 {% block content %}
-    <h1>Search for Pokemon in a flask.</h1>
+    
+    <h1>Your Pokemon</h1>
+    <hr>
+    {% for poke in pokemon %}
+        {% include './includes/_post.html.j2'%}
+    {% endfor %}
 {% endblock %}
