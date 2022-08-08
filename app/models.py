@@ -99,3 +99,13 @@ class Pokemon(db.Model):
     def delete(self):
         db.session.delete(self)
         db.session.commit()
+
+    def from_dict(self, data):
+        self.name=data['name']
+        self.ability=data['ability']
+        self.attack=data['attack']
+        self.defence=['defence']
+        self.hp=data['HP']
+        self.url=data['sprite']
+
+    

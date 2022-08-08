@@ -9,22 +9,60 @@ Choose Your Pokemon
 <h1></h1>
 <form action="/choose_pokemon" method="POST">
   <div class="mb-3">
-    <label for="name" class="form-label">Enter Pokemon Name</label>
+    <label for="name" class="form-label" style="color:white">Enter Pokemon Name</label>
     <input type="text" name = "name" class="form-control" id="name">
   </div>
   <button type="submit" class="btn btn-secondary">Submit</button>
   <small style="color:red">{{error}}</small>
 </form>
 
-{% if poke_data %}
+{% if pokemon %}
 
-<img src = {{poke_data.sprite}}>
+
+<div class="card">
+    <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="{{poke_data.sprite}}" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">{{poke_data.name.title()}}</h5>
+            <p class="card-text">Ability: {{poke_data.ability}}</p>
+            <p class="card-text">Attack: {{poke_data.attack}}</p>
+            <p class="card-text">Defence: {{poke_data.defence}}</p>
+            <p class="card-text">HP: {{poke_data.HP}}</p>
+            {% if current_user.is_captured(pokemon) %}
+            <small><a href="{{url_for('poke.capture_pokemon', id=pokemon.name)}}">Catch</a></small>
+            {% else %}
+            <small><a href="{{url_for('poke.release_pokemon', id=pokemon.name)}}">Release</a></small>
+            {% endif %}
+        </div>
+    </div>
+</div> 
+
+{# <img src = {{poke_data.sprite}}>
 <h1>{{poke_data.name.title()}}</h1>
 <p>Ability: {{poke_data.ability}}</p>
 <p>Defence: {{poke_data.defence}}</p>
 <p>Attack: {{poke_data.attack}}</p>
-<p>HP: {{poke_data.HP}}</p>
+<p>HP: {{poke_data.HP}}</p> #}
 
+{% endif %}
+
+{% if pokemon %}
+<div class="card">
+    <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="{{pokemon.url}}" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">{{pokemon.name}}</h5>
+        <p class="card-text">Ability: {{pokemon.ability}}</p>
+        <p class="card-text">Attack: {{pokemon.attack}}</p>
+        <p class="card-text">Defence: {{pokemon.defence}}</p>
+        <p class="card-text">HP: {{pokemon.hp}}</p>
+        {% if current_user.is_captured(pokemon) %}
+        <small><a href="{{url_for('poke.capture_pokemon', id=pokemon.id)}}">Catch</a></small>
+        {% else %}
+        <small><a href="{{url_for('poke.release_pokemon', id=pokemon.id)}}">Release</a></small>
+        {% endif %}
+    </div>
+</div> 
 {% endif %}
 
 {% endblock %}

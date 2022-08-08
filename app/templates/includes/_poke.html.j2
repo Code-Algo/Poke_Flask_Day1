@@ -1,0 +1,17 @@
+
+<div class="card">
+    <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="{{pokemon.url}}" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">{{pokemon.name}}</h5>
+        <p class="card-text">Ability: {{pokemon.ability}}</p>
+        <p class="card-text">Attack: {{pokemon.attack}}</p>
+        <p class="card-text">Defence: {{pokemon.defence}}</p>
+        <p class="card-text">HP: {{pokemon.hp}}</p>
+        {% if current_user.is_captured(pokemon) %}
+        <small><a href="{{url_for('poke.capture_pokemon', id=pokemon.name)}}">Catch</a></small>
+        {% else %}
+        <small><a href="{{url_for('poke.release_pokemon', id=pokemon.name)}}">Release</a></small>
+        {% endif %}
+    </div>
+</div> 
