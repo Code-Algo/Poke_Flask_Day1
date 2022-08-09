@@ -18,19 +18,19 @@ def pokedex():
 @login_required
 def capture_pokemon(id):
     pokemon = Pokemon.query.get(id)
-    pokemon.capture_pokemon(pokemon)
-    pokemon.save()
-    flash('Pokemon Captured')
-    return redirect(url_for('choose_pokemon', pokemon=pokemon))
+    current_user.capture_pokemon(pokemon)
+    current_user.save()
+    flash('Pokemon Captured', 'success')
+    return redirect(url_for('main.choose_pokemon', pokemon=pokemon))
 
 @poke.route('/release_pokemon/<int:id>', methods=['GET'])
 @login_required
 def release_pokemon(id):
     pokemon = Pokemon.query.get(id)
-    pokemon.release_pokemon(pokemon)
-    pokemon.save()
-    flash('Pokemon Released')
-    return render_template(url_for('choose_pokemon', pokemon=pokemon))
+    current_user.release_pokemon(pokemon)
+    current_user.save()
+    flash('Pokemon Released', 'success')
+    return render_template(url_for('main.choose_pokemon', pokemon=pokemon))
 
 @poke.route('/show_handlers')
 def show_handlers():

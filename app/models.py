@@ -59,12 +59,12 @@ class User(UserMixin, db.Model):
         return pokemon_to_check in self.pokemon
 
     def capture_pokemon(self, pokemon_to_capture):
-        if not self.is_pokemon(pokemon_to_capture):
+        if not self.is_captured(pokemon_to_capture):
             self.pokemon.append(pokemon_to_capture)
             db.session.commit()
 
     def release_pokemon(self, pokemon_to_release):
-        if self.is_pokemon(pokemon_to_release):
+        if self.is_captured(pokemon_to_release):
            self.pokemon.remove(pokemon_to_release)
            db.session.commit()
 
@@ -90,7 +90,7 @@ class Pokemon(db.Model):
     url = db.Column(db.String)
 
     def __repr__(self):
-        return f'<Pokemon: {self.id} | {self.body}'
+        return f'<Pokemon: {self.id} | {self.name}'
 
     def save(self):
         db.session.add(self) # add the user to the session

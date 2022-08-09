@@ -19,7 +19,7 @@ Choose Your Pokemon
 {% if pokemon %}
 
 
-<div class="card">
+{# <div class="card">
     <div class="card" style="width: 18rem;">
     <img class="card-img-top" src="{{poke_data.sprite}}" alt="Card image cap">
         <div class="card-body">
@@ -35,7 +35,7 @@ Choose Your Pokemon
             {% endif %}
         </div>
     </div>
-</div> 
+</div>  #}
 
 {# <img src = {{poke_data.sprite}}>
 <h1>{{poke_data.name.title()}}</h1>
@@ -56,7 +56,7 @@ Choose Your Pokemon
         <p class="card-text">Attack: {{pokemon.attack}}</p>
         <p class="card-text">Defence: {{pokemon.defence}}</p>
         <p class="card-text">HP: {{pokemon.hp}}</p>
-        {% if current_user.is_captured(pokemon) %}
+        {% if not current_user.is_captured(pokemon) %}
         <small><a href="{{url_for('poke.capture_pokemon', id=pokemon.id)}}">Catch</a></small>
         {% else %}
         <small><a href="{{url_for('poke.release_pokemon', id=pokemon.id)}}">Release</a></small>
