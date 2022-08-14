@@ -9,11 +9,14 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{{url_for('poke.index')}}">Hearthome</a>
         </li>
-        <li class="nav-item">
+        {# <li class="nav-item">
           <a class="nav-link" href="{{url_for('main.poke_farm')}}">Poke Farm</a>
-        </li>
+        </li> #}
         <li class="nav-item">
           <a class="nav-link" href="{{url_for('main.choose_pokemon')}}">Choose Pokemon</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href=#>Battle Pokemon</a>
         </li>
         {% if current_user.is_anonymous %}
         <li class="nav-item">
