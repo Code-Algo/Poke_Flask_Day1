@@ -85,7 +85,7 @@ class Pokemon(db.Model):
     name = db.Column(db.String)
     ability = db.Column(db.String)
     attack = db.Column(db.String)
-    defence = db.Column(db.String)
+    defense = db.Column(db.String)
     hp = db.Column(db.String)
     url = db.Column(db.String)
 
@@ -104,7 +104,7 @@ class Pokemon(db.Model):
         self.name=data['name']
         self.ability=data['ability']
         self.attack=data['attack']
-        self.defence=['defence']
+        self.defense=['defense']
         self.hp=data['HP']
         self.url=data['sprite']
 

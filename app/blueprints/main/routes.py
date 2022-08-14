@@ -3,13 +3,29 @@ import requests
 from flask_login import login_required, login_user, login_required, logout_user, current_user
 from . import bp as main
 from . forms import ChooseForm
-from app.models import Pokemon
+from app.models import Pokemon, User
 
 
 # routes
 @main.route('/dict_pokemon', methods=['GET'])
 def dict_pokemon():
     return {"Name":"Pikachu", "Ability":"Static", "Def":"50", "Atk":"50", "HP":"35"}
+
+@main.route('/battle_pokemon', methods =['GET', 'POST'])
+@login_required
+def battle_pokemon():
+    if current_user.pokemon is not None:
+        flash('You Win!', 'success')
+    else:
+        flash('You lose!')
+    return redirect(url_for('main.show_handler'))
+
+
+@main.route('/show_handler', methods =['GET', 'POST'])
+@login_required
+def show_handler():
+    users = User.query.all()
+    return render_template('battle_pokemon.html.j2', users=users)
 
 @main.route('/choose_pokemon', methods =['GET', 'POST'])
 @login_required
@@ -29,7 +45,7 @@ def choose_pokemon():
             new_data = {
                 'name':data['name'],
                 'ability': data['abilities'][0]['ability']['name'],
-                'defence':data['stats'][2]['base_stat'],
+                'defense':data['stats'][2]['base_stat'],
                 'attack':data['stats'][1]['base_stat'],
                 'HP':data['stats'][0]['base_stat'],
                 'sprite':data['sprites']['other']['home']['front_default']
@@ -89,7 +105,7 @@ def poke_farm():
         new_data = {
         'name':data['name'],
         'ability': data['abilities'][1]['ability']['name'],
-        'defence':data['stats'][2]['base_stat'],
+        'defense':data['stats'][2]['base_stat'],
         'attack':data['stats'][1]['base_stat'],
         'HP':data['stats'][0]['base_stat'],
         'sprite':data['sprites']['other']['home']['front_default']

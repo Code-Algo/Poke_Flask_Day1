@@ -5,7 +5,7 @@ response = requests.get(url)
 
 data = response.json()
 #print(data['abilities'][1]['ability']['name'])
-print(data['sprites']['other']['home']['front_default'])
+#print(data['sprites']['other']['home']['front_default'])
 def get_pokemon(data):
     new_data=[]
     name = data['name']
@@ -22,10 +22,11 @@ list_data = []
 new_data = {
     'name':data['name'],
     'ability': data['abilities'][1]['ability']['name'],
-    'defence':data['stats'][2]['base_stat'],
+    'defense':data['stats'][2]['base_stat'],
     'attack':data['stats'][1]['base_stat'],
     'HP':data['stats'][0]['base_stat'],
 }
+print(new_data)
 
 #list_data.append(new_data)
 #print(list_data)

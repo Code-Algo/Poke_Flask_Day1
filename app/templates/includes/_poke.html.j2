@@ -3,10 +3,10 @@
     <div class="card" style="width: 18rem;">
     <img class="card-img-top" src="{{pokemon.url}}" alt="Card image cap">
     <div class="card-body">
-        <h5 class="card-title">{{pokemon.name}}</h5>
+        <h5 class="card-title">{{pokemon.name.title()}}</h5>
         <p class="card-text">Ability: {{pokemon.ability}}</p>
         <p class="card-text">Attack: {{pokemon.attack}}</p>
-        <p class="card-text">Defence: {{pokemon.defence}}</p>
+        <p class="card-text">Defense: 40</p>
         <p class="card-text">HP: {{pokemon.hp}}</p>
         {% if not current_user.is_captured(pokemon) %}
         <small><a href="{{url_for('poke.capture_pokemon', id=pokemon.id)}}">Catch</a></small>
